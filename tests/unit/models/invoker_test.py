@@ -53,6 +53,4 @@ class InvokerTest(unittest.TestCase):
 
     def test_failed_execute_commands(self):
         with self.assertRaises(CommandRuntimeError):
-            self.invoker.commands[0].db_service.delete = MagicMock(
-                return_value=True)
             self.invoker.execute_commands()
