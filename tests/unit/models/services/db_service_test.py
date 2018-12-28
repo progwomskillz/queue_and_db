@@ -20,4 +20,5 @@ class DBServiceTest(unittest.TestCase):
         self.db.save()
 
     def test_delete(self):
+        self.db.session.delete = MagicMock(return_value=True)
         self.db.delete()
