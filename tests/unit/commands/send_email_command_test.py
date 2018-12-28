@@ -6,6 +6,7 @@ from requests.exceptions import RequestException
 
 from commands.send_email_command import SendEmailCommand
 from models.services.email_service import EmailService
+from exceptions.commands.command_cant_be_undone import CommandCantBeUndone
 
 
 class SendEmailCommandTest(unittest.TestCase):
@@ -33,3 +34,7 @@ class SendEmailCommandTest(unittest.TestCase):
     def test_failed_execute(self):
         with self.assertRaises(RequestException):
             self.assertFalse(self.command.execute())
+
+    def test_failed_undo(self):
+        with self.assertRaises(CommandCantBeUndone):
+            self.command.undo()
