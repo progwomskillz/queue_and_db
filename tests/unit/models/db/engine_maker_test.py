@@ -1,7 +1,7 @@
 import unittest
 import os
 
-from sqlalchemy.engine import Engine
+import sqlalchemy.engine
 
 from models.db.engine_maker import EngineMaker
 from exceptions.environment.variable_cant_be_import import VariableCantBeImport
@@ -20,7 +20,7 @@ class EngineMakerTest(unittest.TestCase):
             os.environ[key] = 'test_var'
 
         engine = EngineMaker.make_engine()
-        self.assertIsInstance(engine, Engine)
+        self.assertIsInstance(engine, sqlalchemy.engine.Engine)
 
         for key in os_dict_keys:
             os.environ.pop(key)
