@@ -19,21 +19,24 @@ class RabbitWrapper:
         self.host = EnvironmentSettings.get_var_from_env('RABBIT_HOST')
         self.queue = EnvironmentSettings.get_var_from_env('RABBIT_QUEUE')
 
+    def start_consuming(self):
+        self.__connect()
+        self.channel.basic_consume(self.__cb, queue=self.queue)
+        self.channel.start_consuming()
+
+    def send_message(self, message):
+        self.__connect()
+        body = json.dumps(message)
+        self.channel.basic_publish(exchange='', routing_key=self.queue,
+                                   body=body)
+        self.connection.close()
+
+    def __connect(self):
         connection_params = pika.ConnectionParameters(host=self.host)
         self.connection = pika.BlockingConnection(connection_params)
 
         self.channel = self.connection.channel()
         self.channel.queue_declare(queue=self.queue)
-
-    def start_consuming(self):
-        self.channel.basic_consume(self.__cb, queue=self.queue)
-        self.channel.start_consuming()
-
-    def send_message(self, message):
-        body = json.dumps(message)
-        self.channel.basic_publish(exchange='', routing_key=self.queue,
-                                   body=body)
-        self.connection.close()
 
     def __cb(self, ch, method, properties, body):
         user_dict = json.loads(body)
