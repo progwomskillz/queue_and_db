@@ -3,3 +3,5 @@ pytest
 # DB
 psycopg2-binary
 sqlalchemy
+# Email
+requests
