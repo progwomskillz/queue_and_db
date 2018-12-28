@@ -15,16 +15,15 @@ class EngineMakerTest(unittest.TestCase):
         pass
 
     def test_engine_init(self):
-        os.environ['DB_LOGIN'] = 'test'
-        os.environ['DB_PASSWORD'] = 'test'
-        os.environ['DB_HOST'] = 'test'
-        os.environ['DB_DB'] = 'test'
+        os_dict_keys = ['DB_LOGIN', 'DB_PASSWORD', 'DB_HOST', 'DB_DB']
+        for key in os_dict_keys:
+            os.environ[key] = 'test_var'
+
         engine = EngineMaker.make_engine()
         self.assertIsInstance(engine, Engine)
-        os.environ.pop('DB_LOGIN')
-        os.environ.pop('DB_PASSWORD')
-        os.environ.pop('DB_HOST')
-        os.environ.pop('DB_DB')
+
+        for key in os_dict_keys:
+            os.environ.pop(key)
 
     def test_failed_engine_init(self):
         with self.assertRaises(VariableCantBeImport):
