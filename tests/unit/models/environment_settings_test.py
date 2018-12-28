@@ -5,7 +5,7 @@ from models.environment_settings import EnvironmentSettings
 from exceptions.environment.variable_cant_be_import import VariableCantBeImport
 
 
-class EnvironmentSettingsTests(unittest.TestCase):
+class EnvironmentSettingsTest(unittest.TestCase):
     def setUp(self):
         self.key = 'TEST_VARIABLE'
         self.value = 'TEST_STRING'
