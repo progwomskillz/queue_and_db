@@ -3,7 +3,7 @@ import os
 
 from sqlalchemy.engine import Engine
 
-from models.db.engine_maker import EngimeMaker
+from models.db.engine_maker import EngineMaker
 
 
 class EngineMakerTest(unittest.TestCase):
