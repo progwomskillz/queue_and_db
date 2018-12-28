@@ -2,15 +2,11 @@ import unittest
 from unittest.mock import MagicMock
 import os
 
-from models.invoker import Invoker
-from models.db.engine_maker import EngineMaker
-from models.db.session_maker import SessionMaker
-from models.db.user import User
-from models.services.db_service import DBService
-from commands.write_to_db_command import WriteToDbCommand
-from models.services.email_service import EmailService
-from commands.send_email_command import SendEmailCommand
-from exceptions.commands.command_runtime_error import CommandRuntimeError
+from models import Invoker
+from models.db import EngineMaker, SessionMaker, User
+from models.services import DBService, EmailService
+from commands import WriteToDbCommand, SendEmailCommand
+from exceptions.commands import CommandRuntimeError
 
 
 class InvokerTest(unittest.TestCase):

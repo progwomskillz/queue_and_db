@@ -4,11 +4,9 @@ import os
 
 from sqlalchemy.exc import SQLAlchemyError
 
-from commands.write_to_db_command import WriteToDbCommand
-from models.services.db_service import DBService
-from models.db.session_maker import SessionMaker
-from models.db.engine_maker import EngineMaker
-from models.db.user import User
+from commands import WriteToDbCommand
+from models.db import SessionMaker, EngineMaker, User
+from models.services import DBService
 
 
 class WriteToDbCommandTest(unittest.TestCase):

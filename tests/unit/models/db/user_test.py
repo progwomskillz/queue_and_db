@@ -1,6 +1,6 @@
 import unittest
 
-from models.db.user import User, DBTableBase
+from models.db import User, DBTableBase
 
 
 class UserTest(unittest.TestCase):

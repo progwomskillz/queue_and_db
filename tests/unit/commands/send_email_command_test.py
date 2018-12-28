@@ -4,9 +4,9 @@ import os
 
 from requests.exceptions import RequestException
 
-from commands.send_email_command import SendEmailCommand
-from models.services.email_service import EmailService
-from exceptions.commands.command_cant_be_undone import CommandCantBeUndone
+from commands import SendEmailCommand
+from exceptions.commands import CommandCantBeUndone
+from models.services import EmailService
 
 
 class SendEmailCommandTest(unittest.TestCase):

@@ -3,8 +3,8 @@ import os
 
 import sqlalchemy.engine
 
-from models.db.engine_maker import EngineMaker
-from exceptions.environment.variable_cant_be_import import VariableCantBeImport
+from models.db import EngineMaker
+from exceptions.environment import VariableCantBeImport
 
 
 class EngineMakerTest(unittest.TestCase):

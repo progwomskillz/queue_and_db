@@ -3,8 +3,7 @@ import os
 
 from sqlalchemy.orm.session import Session
 
-from models.db.session_maker import SessionMaker
-from models.db.engine_maker import EngineMaker
+from models.db import SessionMaker, EngineMaker
 
 
 class SessionMakerTest(unittest.TestCase):

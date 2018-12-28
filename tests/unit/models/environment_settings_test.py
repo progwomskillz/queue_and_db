@@ -2,7 +2,7 @@ import unittest
 import os
 
 from models.environment_settings import EnvironmentSettings
-from exceptions.environment.variable_cant_be_import import VariableCantBeImport
+from exceptions.environment import VariableCantBeImport
 
 
 class EnvironmentSettingsTest(unittest.TestCase):

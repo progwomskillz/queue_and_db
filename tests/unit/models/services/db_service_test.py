@@ -2,10 +2,8 @@ import unittest
 from unittest.mock import MagicMock
 import os
 
-from models.services.db_service import DBService
-from models.db.session_maker import SessionMaker
-from models.db.engine_maker import EngineMaker
-from models.db.user import User
+from models.services import DBService
+from models.db import SessionMaker, EngineMaker, User
 
 
 class DBServiceTest(unittest.TestCase):

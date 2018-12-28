@@ -4,8 +4,8 @@ import os
 
 import requests
 
-from models.services.email_service import EmailService
-from exceptions.environment.variable_cant_be_import import VariableCantBeImport
+from models.services import EmailService
+from exceptions.environment import VariableCantBeImport
 
 
 class EmailServiceTest(unittest.TestCase):

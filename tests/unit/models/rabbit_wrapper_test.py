@@ -1,8 +1,8 @@
 import unittest
 import os
 
-from models.rabbit_wrapper import RabbitWrapper
-from exceptions.environment.variable_cant_be_import import VariableCantBeImport
+from models import RabbitWrapper
+from exceptions.environment import VariableCantBeImport
 
 
 class RabbitWrapperTest(unittest.TestCase):
@@ -17,11 +17,11 @@ class RabbitWrapperTest(unittest.TestCase):
         for key in os_dict_keys:
             os.environ[key] = 'test_var'
 
-        rabbit_wrapper = RabbitWrapper()
+        RabbitWrapper()
 
         for key in os_dict_keys:
             os.environ.pop(key)
 
     def test_failed_rabbit_wrapper_init(self):
         with self.assertRaises(VariableCantBeImport):
-            rabbit_wrapper = RabbitWrapper()
+            RabbitWrapper()
