@@ -10,13 +10,12 @@ from exceptions.environment.variable_cant_be_import import VariableCantBeImport
 
 class EmailServiceTest(unittest.TestCase):
     def setUp(self):
-        message = {
+        self.message = {
             'from': 'Man <man@example.com>',
             'to': 'admin@example.com',
             'subject': 'Success',
             'text': 'Write successfully!'
         }
-        self.email_service = EmailService(message)
         requests.post = MagicMock(return_value=True)
 
     def tearDown(self):
@@ -27,11 +26,13 @@ class EmailServiceTest(unittest.TestCase):
         for key in os_dict_keys:
             os.environ[key] = 'test_var'
 
-        self.email_service.send()
+        email_service = EmailService(self.message)
+        email_service.send()
 
         for key in os_dict_keys:
             os.environ.pop(key)
 
     def test_failed_send(self):
         with self.assertRaises(VariableCantBeImport):
-            self.email_service.send()
+            email_service = EmailService(self.message)
+            email_service.send()
