@@ -4,35 +4,32 @@ import os
 
 import requests
 
-from models.services import EmailService
-from exceptions.environment import VariableCantBeImport
+from services import EmailService
 
 
 class EmailServiceTest(unittest.TestCase):
     def setUp(self):
+        self.EM = MagicMock()
+        self.EM.get_var_from_env = MagicMock(return_value='Test')
         self.message = {
             'from': 'Man <man@example.com>',
             'to': 'admin@example.com',
             'subject': 'Success',
             'text': 'Write successfully!'
         }
-        requests.post = MagicMock(return_value=True)
 
     def tearDown(self):
         pass
 
+    def test_init(self):
+        EmailService(self.EM, self.message)
+        keys = ['EMAIL_URL', 'EMAIL_TOKEN']
+        for key in keys:
+            self.EM.get_var_from_env.assert_any_call(key)
+
     def test_send(self):
-        os_dict_keys = ['EMAIL_URL', 'EMAIL_TOKEN']
-        for key in os_dict_keys:
-            os.environ[key] = 'test_var'
+        requests.post = MagicMock(return_value=True)
 
-        email_service = EmailService(self.message)
+        email_service = EmailService(self.EM, self.message)
         email_service.send()
-
-        for key in os_dict_keys:
-            os.environ.pop(key)
-
-    def test_failed_send(self):
-        with self.assertRaises(VariableCantBeImport):
-            email_service = EmailService(self.message)
-            email_service.send()
+        requests.post.assert_called_once()

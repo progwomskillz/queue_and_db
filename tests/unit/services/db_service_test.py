@@ -1,30 +1,24 @@
 import unittest
 from unittest.mock import MagicMock
-import os
 
-from models.services import DBService
-from models.db import SessionMaker, EngineMaker, User
+from services import DBService
 
 
 class DBServiceTest(unittest.TestCase):
     def setUp(self):
-        self.os_dict_keys = ['DB_LOGIN', 'DB_PASSWORD', 'DB_HOST', 'DB_DB']
-        for key in self.os_dict_keys:
-            os.environ[key] = 'test_var'
-
-        engine = EngineMaker.make_engine()
-        session = SessionMaker.make_session(engine)
-        session.commit = MagicMock(return_value=True)
-        user = User(id=1, first_name='Nik', last_name='S.')
-        self.db = DBService(session, user)
+        self.session = MagicMock()
+        self.user_object = MagicMock()
+        self.db_service = DBService(self.session, self.user_object)
 
     def tearDown(self):
-        for key in self.os_dict_keys:
-            os.environ.pop(key)
+        pass
 
     def test_save(self):
-        self.db.save()
+        self.db_service.save()
+        self.session.add.assert_called_once_with(self.user_object)
+        self.session.commit.assert_called_once()
 
     def test_delete(self):
-        self.db.session.delete = MagicMock(return_value=True)
-        self.db.delete()
+        self.db_service.delete()
+        self.session.delete.assert_called_once_with(self.user_object)
+        self.session.commit.assert_called_once()
