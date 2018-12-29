@@ -1,7 +1,7 @@
 from requests.exceptions import RequestException
 from sqlalchemy.exc import SQLAlchemyError
 
-from exceptions.commands.command_runtime_error import CommandRuntimeError
+from infrastructure.exceptions import CommandRuntimeError
 
 
 class Invoker:
