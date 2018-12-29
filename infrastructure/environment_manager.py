@@ -1,11 +1,13 @@
 import os
 
-from exceptions.environment.variable_cant_be_import import VariableCantBeImport
+from infrastructure.exceptions import VariableCantBeImport
 
 
-class EnvironmentSettings:
-    @staticmethod
-    def get_var_from_env(key):
+class EnvironmentManager:
+    def __init__(self):
+        pass
+
+    def get_var_from_env(self, key):
         try:
             return os.environ[key]
         except KeyError:
