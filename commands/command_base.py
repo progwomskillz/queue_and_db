@@ -1,6 +1,6 @@
 from abc import ABC, abstractmethod
 
-from exceptions.commands import CommandCantBeUndone
+from infrastructure.exceptions import CommandCantBeUndone
 
 
 class CommandBase(ABC):
