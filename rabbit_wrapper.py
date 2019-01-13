@@ -54,7 +54,7 @@ class RabbitWrapper:
             'subject': 'Success',
             'text': 'Write successfully!'
         }
-        email_service = EmailService(message)
+        email_service = EmailService(self.EM, message)
         send_email_command = SendEmailCommand(email_service)
 
         commands = [write_to_db_command, send_email_command]
