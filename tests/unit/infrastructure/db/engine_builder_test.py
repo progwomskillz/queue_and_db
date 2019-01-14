@@ -8,9 +8,11 @@ from infrastructure.db import EngineBuilder
 
 class EngineBuilderTest(unittest.TestCase):
     def setUp(self):
-        self.EM = MagicMock()
-        self.EM.get_var_from_env = MagicMock(return_value='Test')
-        self.engine_builder = EngineBuilder(self.EM)
+        self.environment_manager = MagicMock()
+        self.environment_manager.get_var_from_env = MagicMock(
+            return_value='Test'
+        )
+        self.engine_builder = EngineBuilder(self.environment_manager)
 
     def tearDown(self):
         pass
@@ -20,4 +22,4 @@ class EngineBuilderTest(unittest.TestCase):
         self.assertIsInstance(engine, sqlalchemy.engine.Engine)
         keys = ['DB_LOGIN', 'DB_PASSWORD', 'DB_HOST', 'DB_DB']
         for key in keys:
-            self.EM.get_var_from_env.assert_any_call(key)
+            self.environment_manager.get_var_from_env.assert_any_call(key)

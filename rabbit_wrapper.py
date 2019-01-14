@@ -12,10 +12,10 @@ from infrastructure.exceptions import CommandRuntimeError
 
 class RabbitWrapper:
     def __init__(self, environment_manager):
-        self.EM = environment_manager
+        self.environment_manager = environment_manager
 
-        self.host = self.EM.get_var_from_env('RABBIT_HOST')
-        self.queue = self.EM.get_var_from_env('RABBIT_QUEUE')
+        self.host = self.environment_manager.get_var_from_env('RABBIT_HOST')
+        self.queue = self.environment_manager.get_var_from_env('RABBIT_QUEUE')
 
     def start_consuming(self):
         self.__connect()
@@ -40,7 +40,7 @@ class RabbitWrapper:
         user_dict = json.loads(body)
         user_object = User(**user_dict)
 
-        engine_builder = EngineBuilder(self.EM)
+        engine_builder = EngineBuilder(self.environment_manager)
         engine = engine_builder.build()
         session_builder = SessionBuilder(engine)
         session = session_builder.build()
@@ -54,7 +54,7 @@ class RabbitWrapper:
             'subject': 'Success',
             'text': 'Write successfully!'
         }
-        email_service = EmailService(self.EM, message)
+        email_service = EmailService(self.environment_manager, message)
         send_email_command = SendEmailCommand(email_service)
 
         commands = [write_to_db_command, send_email_command]
