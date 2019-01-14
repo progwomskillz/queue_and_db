@@ -1,2 +1,2 @@
-class VariableCantBeImport(Exception):
+class VariableCantBeFound(Exception):
     pass

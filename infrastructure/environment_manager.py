@@ -1,6 +1,6 @@
 import os
 
-from infrastructure.exceptions import VariableCantBeImport
+from infrastructure.exceptions import VariableCantBeFound
 
 
 class EnvironmentManager:
@@ -11,4 +11,4 @@ class EnvironmentManager:
         try:
             return os.environ[key]
         except KeyError:
-            raise VariableCantBeImport('Set ' + key + ' environment variable')
+            raise VariableCantBeFound('Set ' + key + ' environment variable')
