@@ -61,10 +61,9 @@ class RabbitWrapper:
 
         invoker = Invoker(commands)
 
-        try:
-            invoker.execute_commands()
+        if invoker.execute_commands():
             print('Success')
-        except CommandRuntimeError:
+        else:
             print('Error')
 
         session.close()
