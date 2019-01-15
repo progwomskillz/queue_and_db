@@ -1,4 +1,7 @@
+from requests.exceptions import RequestException
+
 from commands.command_base import CommandBase
+from infrastructure.exceptions import CommandRuntimeError
 
 
 class SendEmailCommand(CommandBase):
@@ -6,5 +9,8 @@ class SendEmailCommand(CommandBase):
         self.email_service = email_service
 
     def execute(self):
-        self.email_service.send()
+        try:
+            self.email_service.send()
+        except RequestException:
+            raise CommandRuntimeError('Requests Error')
         return False

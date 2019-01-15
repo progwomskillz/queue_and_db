@@ -1,6 +1,3 @@
-from requests.exceptions import RequestException
-from sqlalchemy.exc import SQLAlchemyError
-
 from infrastructure.exceptions import CommandRuntimeError
 
 
@@ -13,14 +10,10 @@ class Invoker:
         for command in self.commands:
             try:
                 self.__execute_command(command)
-            except RequestException:
+            except CommandRuntimeError:
                 self.__undo_commands()
-                message = 'Request error. Check your network connection'
-                raise CommandRuntimeError(message)
-            except SQLAlchemyError:
-                self.__undo_commands()
-                message = 'SQL error'
-                raise CommandRuntimeError(message)
+                return False
+        return True
 
     def __execute_command(self, command):
         if command.execute():
