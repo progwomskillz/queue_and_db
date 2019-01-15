@@ -7,7 +7,6 @@ from infrastructure.db import EngineBuilder, SessionBuilder
 from services import DBService, EmailService
 from commands import WriteToDbCommand, SendEmailCommand
 from invoker import Invoker
-from infrastructure.exceptions import CommandRuntimeError
 
 
 class RabbitWrapper:
