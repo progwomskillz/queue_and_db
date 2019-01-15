@@ -1,3 +1,3 @@
 from .command_cant_be_undone import CommandCantBeUndone
 from .command_runtime_error import CommandRuntimeError
-from .variable_cant_be_import import VariableCantBeFound
+from .variable_cant_be_found import VariableCantBeFound
